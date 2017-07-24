@@ -1,5 +1,16 @@
-hello: hello.m
-	gcc -o hello hello.m -lobjc -framework Foundation
+OUT=bin
 
-strings: strings.m
-	gcc -o strings strings.m -lobjc -framework Foundation
+clean:
+	rm -rf ${OUT}
+
+${OUT}:
+	mkdir bin
+
+hello: hello.m ${OUT}
+	gcc -o ${OUT}/hello hello.m -lobjc -framework Foundation
+
+strings: strings.m ${OUT}
+	gcc -o ${OUT}/strings strings.m -lobjc -framework Foundation
+
+associated_obj: associated_obj.mm ${OUT}
+	g++ -o ${OUT}/associated_obj associated_obj.mm -lobjc -framework Foundation
